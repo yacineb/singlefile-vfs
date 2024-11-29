@@ -1,0 +1,7 @@
+[workspace]
+members = ["vfs"]
+resolver = "2"
+
+[workspace.dependencies]
+thiserror = "*"
+anyhow = "1.0.93"
