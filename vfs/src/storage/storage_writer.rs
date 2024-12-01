@@ -46,7 +46,7 @@ where
     pub fn write_padding(&mut self) -> anyhow::Result<()> {
         let col = (self.pos & 0x0F) as usize;
         if col != 0 {
-            let padding = vec![0; 16 - col];
+            let padding = [0; 16];
             self.write(&padding, 0, 16 - col)?;
         }
         Ok(())
