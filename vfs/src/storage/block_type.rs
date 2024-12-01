@@ -1,22 +1,13 @@
-#[derive(Debug, PartialEq, Eq, Clone, Copy)]
-pub enum BlockType {
-    Super,
-    Directory,
-    Regular,
-    Chunk,
-    Free,
-    Name,
-}
+use num_enum::{FromPrimitive, IntoPrimitive};
 
-impl From<BlockType> for u8 {
-    fn from(value: BlockType) -> Self {
-        match value {
-            BlockType::Super => 1,
-            BlockType::Directory => 2,
-            BlockType::Regular => 4,
-            BlockType::Chunk => 8,
-            BlockType::Free => 16,
-            BlockType::Name => 32,
-        }
-    }
+#[derive(Debug, Default, PartialEq, Eq, Clone, Copy, IntoPrimitive, FromPrimitive)]
+#[repr(u8)]
+pub enum BlockType {
+    #[default]
+    Free = 0,
+    Super = 1,
+    Directory = 2,
+    Regular = 3,
+    Chunk = 4,
+    Name = 5,
 }
