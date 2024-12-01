@@ -1,5 +1,3 @@
-use alloc::vec;
-
 use super::storage_connection::StorageConnection;
 
 /// Represents a writer for storage, maintaining a position.
