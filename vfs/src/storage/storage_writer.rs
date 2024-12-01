@@ -16,8 +16,8 @@ where
     }
 
     /// Writes a 4-byte integer to storage at the current position and advances the position.
-    pub fn write_i32(&mut self, v: i32) -> anyhow::Result<()> {
-        self.storage.write_i32(self.pos, v)?;
+    pub fn write_u32(&mut self, v: u32) -> anyhow::Result<()> {
+        self.storage.write_u32(self.pos, v)?;
         self.pos += 4;
         Ok(())
     }

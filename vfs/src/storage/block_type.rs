@@ -1,10 +1,12 @@
 use num_enum::{FromPrimitive, IntoPrimitive};
 
+pub const FREE_BLOCK_TYPE: u32 = 0;
+
 #[derive(Debug, Default, PartialEq, Eq, Clone, Copy, IntoPrimitive, FromPrimitive)]
-#[repr(u8)]
+#[repr(u32)]
 pub enum BlockType {
     #[default]
-    Free = 0,
+    Free = FREE_BLOCK_TYPE,
     Super = 1,
     Directory = 2,
     Regular = 3,
