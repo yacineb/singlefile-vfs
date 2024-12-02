@@ -10,13 +10,19 @@ use super::{block_type::BlockType, storage_connection::StorageConnection};
 pub struct Block {
     pub offset: u64,
     pub block_type: BlockType,
+    pub size: u32,
 }
 
 impl Block {
     pub fn new<S: StorageConnection>(storage: &S, offset: u64) -> anyhow::Result<Self> {
         // read the "magic" byte, the very first one
         let block_type: BlockType = storage.read_u32(offset)?.try_into()?;
-        Ok(Self { offset, block_type })
+        let size = storage.read_u32(offset + 4)?;
+        Ok(Self {
+            offset,
+            block_type,
+            size,
+        })
     }
 
     /// returns the data section offset for the given block
@@ -36,7 +42,7 @@ impl Block {
     pub fn write_u64<S: StorageConnection>(
         &self,
         pos: u64,
-        storage: &mut S,
+        storage: &S,
         value: u64,
     ) -> anyhow::Result<()> {
         storage.write_u64(self.data_offset(pos), value)
@@ -45,7 +51,7 @@ impl Block {
     pub fn write<S: StorageConnection>(
         &self,
         pos: u64,
-        storage: &mut S,
+        storage: &S,
         buf: &[u8],
     ) -> anyhow::Result<()> {
         storage.write(self.data_offset(pos), buf)

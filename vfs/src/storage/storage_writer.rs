@@ -2,7 +2,7 @@ use super::storage_connection::StorageConnection;
 
 /// Represents a writer for storage, maintaining a position.
 pub struct StorageWriter<'a, S> {
-    storage: &'a mut S,
+    storage: &'a S,
     pos: u64,
 }
 
@@ -11,7 +11,7 @@ where
     S: StorageConnection,
 {
     /// Creates a new `StorageWriter` with the given storage and position.
-    pub fn new(storage: &'a mut S, pos: u64) -> Self {
+    pub fn new(storage: &'a S, pos: u64) -> Self {
         Self { storage, pos }
     }
 

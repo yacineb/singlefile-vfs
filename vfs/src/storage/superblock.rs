@@ -27,7 +27,7 @@ impl SuperBlock {
 
     pub fn set_root_dir<S: StorageConnection>(
         &self,
-        storage: &mut S,
+        storage: &S,
         obj: &Block,
     ) -> anyhow::Result<()> {
         self.0.write_u64(0, storage, obj.offset / 16)
